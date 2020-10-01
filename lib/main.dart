@@ -1,9 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import './quiz.dart';
 import './result.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(KardusinfoApp());
+
+class KardusinfoApp extends StatelessWidget {
+  const KardusinfoApp({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoApp(
+      home: MyApp(),
+      debugShowCheckedModeBanner: false,
+      theme: CupertinoThemeData(primaryColor: CupertinoColors.activeBlue),
+    );
+  }
+}
 
 class MyApp extends StatefulWidget {
   @override
@@ -63,20 +77,19 @@ class _MyAppState extends State<MyApp> {
       },
     ];
 
-    return MaterialApp(
-        home: Scaffold(
-            appBar: AppBar(
-              title: Text('My First App'),
-            ),
-            body: _questionIndex < _questions.length
-                ? Quiz(
-                    answerQuestion: _answerQuestion,
-                    questions: _questions,
-                    questionIndex: _questionIndex,
-                  )
-                : Result(
-                    resetQuiz: _resetQuiz,
-                    resultScore: _totalScore,
-                  )));
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('My First App'),
+        ),
+        body: _questionIndex < _questions.length
+            ? Quiz(
+                answerQuestion: _answerQuestion,
+                questions: _questions,
+                questionIndex: _questionIndex,
+              )
+            : Result(
+                resetQuiz: _resetQuiz,
+                resultScore: _totalScore,
+              ));
   }
 }
